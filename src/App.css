@@ -5,19 +5,6 @@
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
@@ -39,4 +26,142 @@
 
 .read-the-docs {
   color: #888;
+}
+
+.messages {
+
+  background: url(/bg-chat.png), #FCF4EC ;
+  width: 100% ;
+  background-size: contain ;
+  border-radius:  10px ;
+  max-height: 600px ;
+  overflow: auto ;
+  box-shadow: rgba(50,50,93,0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px ;
+
+}
+
+.messages .content {
+
+  padding: 20px ;
+
+}
+
+
+.card { 
+
+  background-color:  #fff ; 
+  width: auto ; 
+  padding: 17px 15px 10px ; 
+  border-radius: 8px ;
+  margin-bottom: 5px ;
+  text-align: left ;
+  position: relative ;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px ; 
+
+
+
+}
+
+.card p {
+
+  margin: 0 ; 
+  padding: 10px 0px ;
+  font-size: 13px ;
+  font-weight: 500 ;
+  margin-bottom: -5px ;
+  text-align: left ;
+
+}
+
+.card span {
+
+  margin: 0 ; 
+  font-size: 13px ;
+  margin-bottom: -5px ;
+  text-align: left ;
+  
+}
+
+.user-email{
+
+  position: absolute ;
+  left: 5px ;
+  top: 2px ;
+  color: blueviolet ; 
+  font-weight: 600 ; 
+
+}
+
+.login {
+
+  background: url(/bg-login.png), #FCF4EC00 ;
+  height: 400px ;
+  width: 100% ;
+  background-repeat: no-repeat ;
+  background-size: cover ;
+  background-position: center center ;
+  border-radius:  10px ;
+  display: flex ;
+  justify-content: center;
+  align-items: end ;
+  box-shadow: rgba(50,50,93,0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px ;
+  transition: 1.5s ;
+
+}
+
+.login:hover {
+
+  background: url(/bg-login.png), #FCF4EC ;
+  background-position: center center ; 
+  background-repeat: no-repeat ;
+  background-size: cover;
+
+}
+
+.login button {
+
+  margin-bottom: 50px ;
+  background-color: #48c658 ;
+  border: 5px solid #F2F3F2;
+  outline: 1px solid #b1afaf7d;
+  border-radius: 5px ;
+  padding: 4px 36px ; 
+  color: #fff ; 
+  text-transform: uppercase ;
+  font-family: inherit ;
+  font-weight: 600 ;
+  font-size: 21px ;
+  transition: .4s ;
+  cursor: pointer ;
+}
+
+.login button:hover {
+
+    transform: scale(1.1) ;
+
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.header { 
+
+  background-color: #008169 ;
+  position: sticky ;
+  top: 0 ;
+  z-index: 9 ; 
+  height: 48px;          
+  padding: 0 12px;         
+  display: flex ;
+  justify-content: space-between ;
+  align-items: center ;
+}
+
+.header .left { 
+
+  display: flex ;
+  align-items: center ;
+  gap: 10px ; 
+
 }

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react" ;
 import { supabase } from "../supabaseClient" ;
 import Message from "./Message";
+import Header from "./Header";
 
 const Messages = () => {
 
@@ -25,20 +26,28 @@ const Messages = () => {
 
   return (
 
-    <section>
+    <section className="messages">
 
-      Messages
+      <Header/>
 
-      <div> {messages && messages.map((item, index) => (
+      <div className="content"> 
+        
+        { messages && messages.map((item, index) => (
         
                                             <Message
 
                                                 key={index}
+
                                                 message={item.content}
+
                                                 date={item.created_at}
+
                                                 email={item.email} 
       
-                                                          />))} </div>
+                                                 />
+                                                    ))
+                                                         } 
+        </div>
 
     </section>
   ) 
