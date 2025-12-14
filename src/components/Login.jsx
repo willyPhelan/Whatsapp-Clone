@@ -1,5 +1,6 @@
 import { supabase } from '../supabaseClient' ;
 
+
 const Login = () => {
 
     const handleLogin= async () => {
@@ -10,23 +11,13 @@ const Login = () => {
 
         } ;
 
-
-    const handleLogout = async () => {
-
-        const { error } = await supabase.auth.signOut() ; 
-
-        window.location.reload() ;
-    
-    } ;
-
-
   return (
 
     <section className="login"> 
     
     <button onClick={handleLogin}> Iniciar </button>
 
-    <button onClick={handleLogout}> Cerrar </button>
+   { /* <button onClick={handleLogout}> Cerrar </button> */ }
 
     </section>
 

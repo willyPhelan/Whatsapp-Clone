@@ -23,6 +23,8 @@ function App() {
 
         <h1> Whatsapp Clone </h1> 
 
+        <p> Hecho con React y Supabase </p>
+
         { session ? <Messages/> : <Login/> }
 
     </div>

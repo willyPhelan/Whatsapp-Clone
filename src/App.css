@@ -147,11 +147,13 @@
 
 .header { 
 
+  color: #fff ; 
+  font-weight: bold ;
   background-color: #008169 ;
   position: sticky ;
   top: 0 ;
   z-index: 9 ; 
-  height: 48px;          
+  height: 60px;          
   padding: 0 12px;         
   display: flex ;
   justify-content: space-between ;
@@ -163,5 +165,64 @@
   display: flex ;
   align-items: center ;
   gap: 10px ; 
+
+}
+
+.header .logout { 
+
+  cursor: pointer ;
+  transition: .3s;
+
+}
+
+.header .logout:hover { 
+
+  transform: scale(1.1) ;
+
+}
+
+.header p {
+
+  margin: 0 ;
+
+}
+
+.header p .name { 
+
+  color: #fff ; 
+  font-weight: 500 ; 
+  text-align: left;
+
+
+}
+
+.header p span {
+
+  color: #fff ;
+  font-weight: 300 ;
+  font-size: 12px ;
+  display: block ;
+  margin-top: -2px ;
+  text-align: left;
+
+
+}
+
+.header img { 
+
+  width: 45px ;
+  border-radius: 50% ;
+}
+
+.header .dots {
+
+  cursor: pointer ;
+  transition: .3s;
+
+}
+
+.header .left .logout:hover, .header .dots:hover { 
+
+  transform: scale(1.1) ;
 
 }
