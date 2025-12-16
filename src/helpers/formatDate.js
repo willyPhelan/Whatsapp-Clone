@@ -5,7 +5,10 @@ export const formatDate = messageDate => {
     let hours = date.getHours(); 
     let minutes = date.getMinutes() ;
 
-    let time = hours + ":" + minutes ; 
+    const formattedHours = String(hours).padStart(2, '0') ;
+    const formattedMinutes = String(minutes).padStart(2, '0') ;
+    
+    let time = formattedHours + ":" + formattedMinutes ;
 
     const option = { 
 
@@ -16,6 +19,8 @@ export const formatDate = messageDate => {
     const newDate = date.toLocaleDateString('en-US', option)
 
     console.log(newDate) ; 
+
+    
 
     return time ; 
 }

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { formatDate } from "../helpers/formatDate";
 import { supabase } from "../supabaseClient" ;
+import ReadReceipt from "./ReadReceipt" ;
 
-const Message = ({message, date, email}) => {
+const Message = ({message, date, email, isRead}) => {
 
     const [user, setUser ] = useState("") ;
 
@@ -12,29 +13,35 @@ const Message = ({message, date, email}) => {
 
         if (data.session && data.session.user) {  setUser(data.session.user.email) ;  }
         
-        console.log(data.session?.user?.email) ;
-
     }
 
     useEffect( () => { getSession() } , [] ) ; 
 
+    const isOwnMessage = user == email ;
+
     return(
 
-        <div className={ `card ${user == email ? "me" : "" } ` } >
+        <div className={ `card ${isOwnMessage ? "me" : "" } ` } >
 
-       <div className="message-body"> 
+           <div className="message-body"> 
 
                 <p> {message} </p>
 
-                <span className="fecha"> {formatDate(date)} </span>
+                <div className="time-status"> 
+
+                    <span className="fecha"> {formatDate(date)} </span>
+                    
+                    {isOwnMessage && <ReadReceipt isRead={isRead} />}
+
+                </div>
                 
-         </div>
+           </div>
 
-        <span className="user-email"> 
+           <span className="user-email"> 
 
-            { user == email ? "me" : email.split('@')[0] } 
+            { isOwnMessage ? "me" : email.split('@')[0] } 
             
-        </span>
+           </span>
 
         </div>
 
@@ -42,4 +49,4 @@ const Message = ({message, date, email}) => {
 
 }
 
-export default Message ; 
+export default Message ;

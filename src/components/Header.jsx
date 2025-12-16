@@ -1,8 +1,8 @@
-import Arrow from './icons/Arrow';
-import { supabase } from '../supabaseClient';
-import { useState } from 'react';
-import Dots from './icons/Dots';
-import { getAvatar } from '../helpers/getAvatar';
+import Arrow from "./icons/Arrow" ;
+import Dots from "./icons/Dots" ;
+import { supabase } from "../supabaseClient" ;
+import { getAvatar } from "../helpers/getAvatar";
+import { useState } from "react" ;
 
 const Header = ({ remoteUserEmail }) => {
 
@@ -13,16 +13,7 @@ const Header = ({ remoteUserEmail }) => {
     await supabase.auth.signOut() ;
 
     window.location.reload() ;
-
   } ;
-
-  const handleDots = () => {
-
-    setOpen(o => !o) ;
-
-  } ;
-
-  if (!remoteUserEmail) return null ; 
 
   return (
 
@@ -33,14 +24,14 @@ const Header = ({ remoteUserEmail }) => {
         <p className="logout" onClick={handleLogout}>
 
           <Arrow />
-
+          
         </p>
 
         <img src={`/avatars/avatar-${getAvatar(remoteUserEmail)}.jpg`} alt="avatar" />
 
         <p className="name">
 
-          {remoteUserEmail.split('@')[0]}
+          {remoteUserEmail.split("@")[0]}
 
           <span>Online</span>
 
@@ -50,15 +41,19 @@ const Header = ({ remoteUserEmail }) => {
 
       <div className="menu">
 
-        <p className="dots" onClick={handleDots}>
+        <p className="dots" onClick={() => setOpen(o => !o)}>
 
           <Dots />
 
         </p>
 
-        <div className={`float-out ${open ? "open" : ""}`} onClick={handleLogout}> Logout </div> 
-        
+        <div className={`float-out ${open ? "open" : ""}`} onClick={handleLogout}>
+
+          Logout
+
         </div>
+
+      </div>
 
     </div>
 

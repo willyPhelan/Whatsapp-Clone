@@ -1,70 +1,108 @@
-import { useEffect, useRef, useState } from "react";
-import { supabase } from "../supabaseClient";
-import Message from "./Message";
-import Header from "./Header";
-import SendMessage from "./SendMessage";
+import { useEffect, useRef, useState } from "react" ;
+import { supabase } from "../supabaseClient" ;
+import Message from "./Message" ;
+import Header from "./Header" ;
+import SendMessage from "./SendMessage" ;
 
 const Messages = () => {
 
   const [messages, setMessages] = useState([]) ;
 
-  const [remoteUser, setRemoteUser] = useState(null) ;
+  const [userEmail, setUserEmail] = useState(null) ;
 
-  const scroll = useRef() ;
-
-  const getSessionAndMessages = async () => {
-
-    const { data: sessionData } = await supabase.auth.getSession() ;
-    
-    const myEmail = sessionData.session.user.email;
-
-    const { data, error } = await supabase.from("messages").select("*") ;
-
-    if (!error) {
-
-      setMessages(data) ;
-
-      const otherUser = data.find(m => m.email !== myEmail) ;
-
-      if (otherUser) {
-
-        setRemoteUser(otherUser.email) ;
-      }
-    }
-  } ;
+  const scrollRef = useRef(null);
 
   useEffect(() => {
 
-    getSessionAndMessages() ;}, []) ;
+    const getSession = async () => {
+
+      const { data } = await supabase.auth.getSession() ;
+
+      setUserEmail(data.session.user.email) ;
+    } ;
+
+    getSession() ;
+
+  }, []) ;
+
+  useEffect(() => {
+
+    const fetchMessages = async () => {
+
+      const { data, error } = await supabase
+
+        .from("messages")
+        .select("*")
+        .order("created_at", { ascending: true }) ;
+
+      if (!error) setMessages(data) ; } ;
+
+    fetchMessages() ; }, []) ;
+
+  useEffect(() => {
+
+    const channel = supabase.channel("messages-realtime").on("postgres_changes",
+       
+        { event: "INSERT", schema: "public", table: "messages" },payload => {
+
+          setMessages(prev => [...prev, payload.new]) ;
+
+          scrollRef.current?.scrollIntoView({ behavior: "smooth" }) ;
+        }
+      ).subscribe();
+
+    return () => {
+
+      supabase.removeChannel(channel) ; } ; }, []) ;
+
+  const remoteUserEmail =messages.find(m => m.email !== userEmail)?.email ?? "Usuario";
+
+  
 
   return (
 
     <section className="messages">
 
-      <Header remoteUserEmail={remoteUser} />
+      <Header remoteUserEmail={remoteUserEmail} />
 
       <div className="content">
 
-        {messages.map((item, index) => (
+        {messages.map((msg, index) => (
 
           <Message
 
             key={index}
-            message={item.content}
-            date={item.created_at}
-            email={item.email}
+            message={msg.content}
+            date={msg.created_at}
+            email={msg.email}
+            isOwn={msg.email === userEmail}
 
+
+           
+            
+            // <<<< PASAR EL ESTADO DE LECTURA >>>>
+            // Si la columna existe en Supabase:
+            isRead={msg.is_read || false} 
+            
+            // Si no existe, usa true temporalmente para ver el ícono:
+            // isRead={true}
           />
 
+          
         ))}
 
-        <span ref={scroll}></span>
-
+        <span ref={scrollRef} />
+        
       </div>
 
-      <SendMessage scroll={scroll} />
+      <SendMessage />
 
+      
+      
     </section>
+
+    
+
   ) ;
 } ;
 
