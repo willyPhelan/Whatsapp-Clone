@@ -17,5 +17,5 @@ export const formatDate = messageDate => {
 
     console.log(newDate) ; 
 
-    return newDate + " - " + time ; 
+    return time ; 
 }

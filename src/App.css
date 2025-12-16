@@ -1,9 +1,42 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  width: 100% ;
+  max-width: none ;   
+  margin: 0 ;
+  padding: 2rem ;
 }
+
+html, body {
+
+  height: 100% ;
+  margin: 0 ;
+
+}
+
+body {
+  overflow: hidden;
+}
+
+.App {
+  width: 100% ;
+  max-width: 900px ; 
+  margin: 0 auto ;
+}
+
+.App h1,
+.App p {
+  text-align: center;
+  margin: 0;
+}
+
+.App h1 {
+  margin-top: 20px;
+}
+
+.App p {
+  margin-bottom: 20px;
+  opacity: 0.8;
+}
+
 
 @keyframes logo-spin {
   from {
@@ -22,27 +55,40 @@
 
 .card {
   padding: 2em;
+  max-width: 50%;
+  width: fit-content;
 }
+
+
 
 .read-the-docs {
   color: #888;
 }
 
 .messages {
-
-  background: url(/bg-chat.png), #FCF4EC ;
+  
   width: 100% ;
+  height: 90vh; 
+  max-height: 750px;         
+  max-width: 900px ;     
+  margin: 0 auto ;      
+  background: url(/bg-chat.png), #FCF4EC ;
   background-size: contain ;
-  border-radius:  10px ;
-  max-height: 600px ;
+  border-radius: 10px ;
   overflow: auto ;
-  box-shadow: rgba(50,50,93,0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px ;
-
+  display: flex;
+  flex-direction: column;
 }
+
 
 .messages .content {
 
   padding: 20px ;
+  padding-bottom: 30px ; 
+  display: flex ;          
+  flex-direction: column ;
+  flex-grow: 1;
+  overflow-y: auto;
 
 }
 
@@ -50,37 +96,49 @@
 .card { 
 
   background-color:  #fff ; 
-  width: auto ; 
-  padding: 17px 15px 10px ; 
+  width: 35% ; 
+  padding: 17px 15px 10px 15px ; 
   border-radius: 8px ;
   margin-bottom: 5px ;
   text-align: left ;
   position: relative ;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px ; 
 
-
-
 }
 
 .card p {
 
-  margin: 0 ; 
+  margin: 0 ;
   padding: 10px 0px ;
   font-size: 13px ;
-  font-weight: 500 ;
-  margin-bottom: -5px ;
-  text-align: left ;
-
+  font-weight: 400 ;
+  margin-bottom:  -5px ;
+  text-align: left;
+  color: #1a1a1a ;
+  opacity: 1 ;
 }
 
-.card span {
+
+ .fecha {
 
   margin: 0 ; 
   font-size: 13px ;
   margin-bottom: -5px ;
-  text-align: left ;
-  
+  display: block;
+  text-align: right ;
+  color: #777; 
+  opacity: 0.8 ; 
+
+
 }
+
+.card.me {
+    
+    background-color: #dcf8c6 ;
+    align-self: flex-end ;
+    height: 55px;
+}
+
 
 .user-email{
 
@@ -154,7 +212,7 @@
   top: 0 ;
   z-index: 9 ; 
   height: 60px;          
-  padding: 0 12px;         
+  padding: 10px 20px;       
   display: flex ;
   justify-content: space-between ;
   align-items: center ;
@@ -212,6 +270,11 @@
 
   width: 45px ;
   border-radius: 50% ;
+  height: 45px ;       
+  border-radius: 50% ;
+  object-fit: cover ; 
+  flex-shrink: 0 ;     
+
 }
 
 .header .dots {
@@ -225,4 +288,160 @@
 
   transform: scale(1.1) ;
 
+}
+
+.float-out {
+
+  position: absolute ;
+  right: 15px ;
+  bottom: -13 px ; 
+  background-color: #fff ;
+  color: #008169;
+  padding: 6px 13px ;
+  border-radius: 3px ;
+  font-size: 14px ;
+  font-weight: 500 ;
+  cursor: pointer ;
+  display: none ;
+  transition: .3s;
+
+}
+
+.float-out:hover{
+
+  color: #008169 ;
+
+}
+
+.float-out.open {
+
+  display: block ;
+
+} 
+
+.menu {
+
+  position: relative ;
+}
+
+
+.menu:hover .float-out {
+
+  display: block ;
+
+}
+
+.menu:hover .dots {
+
+  opacity: 0.6 ;
+}
+
+.send-message  {
+
+  background-image: url(./bg-chat.png) ;
+  background-color: #FCF4EC;
+}
+
+
+.send-message {
+
+  position: sticky ;
+  bottom: 0 ;
+  padding: 10px ;
+
+}
+
+.send-message form {
+
+  display: flex ;
+  gap: 10px ;
+
+}
+
+.send-message input {
+
+  padding: 10px  ;
+  padding-left: 15px;
+  border: 0 ;
+  border-radius: 20px ;
+  flex-grow: 1;
+  font-size: 16px ;
+  outline: none ;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px ;
+
+}
+
+.send-message button {
+
+  background-color: #04A686 ;
+  border: 0 ;
+  padding: 10px 9px 10px 11px ;
+  border-radius: 50% ;
+  display: flex ;
+  cursor: pointer ;
+  transition: .3s ; 
+  align-items: center ;
+  justify-content: center;
+
+}
+
+.send-message button:hover {
+
+  transform: scale(1.1) ;
+
+}
+
+.send-message button svg {
+
+  width: 18px ; 
+  height: 18px ;
+}
+
+/* scroll */
+
+::-webkit-scrollbar {
+
+  width: 5px ;
+
+}
+::-webkit-scrollbar-track {
+
+  background: #F2F3F2 ;
+
+  border-radius: 10px ;
+}
+
+::-webkit-scrollbar-thumb {
+
+  background: #008169 ;
+
+  border-radius: 15px ;
+}
+
+
+.card .message-body {
+
+    display: flex ;
+    align-items: flex-end ; 
+    width: 100% ; 
+    justify-content: flex-start ;
+    padding: 5px ;
+}
+
+.card .message-body p {
+    flex-grow: 1 ;
+    padding: 5px ; 
+    margin: 0 ;
+    padding-right: 8px ; 
+}
+
+
+.card .message-body .fecha {
+    flex-shrink: 0 ; 
+    font-size: 11px ; 
+    opacity: 0.8 ;
+    color: #777 ;
+    display: inline-block ;
+    text-align: left ;
+    margin: 0 ;
 }

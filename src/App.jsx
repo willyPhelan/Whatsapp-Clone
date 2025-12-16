@@ -4,6 +4,7 @@ import Login from './components/Login'
 import Messages from './components/Messages'
 import { supabase } from './supabaseClient' ;
 
+
 function App() {
  
   const [session, setSession] = useState(null) ;
@@ -26,6 +27,7 @@ function App() {
         <p> Hecho con React y Supabase </p>
 
         { session ? <Messages/> : <Login/> }
+
 
     </div>
    

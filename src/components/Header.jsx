@@ -1,55 +1,68 @@
-import Arrow from './icons/Arrow' ;
-import { supabase } from '../supabaseClient' ;
-import { useState, useEffect } from 'react';
+import Arrow from './icons/Arrow';
+import { supabase } from '../supabaseClient';
+import { useState } from 'react';
 import Dots from './icons/Dots';
+import { getAvatar } from '../helpers/getAvatar';
 
-const Header = () => {
+const Header = ({ remoteUserEmail }) => {
 
-    const [user, setUser] = useState("Juan")
+  const [open, setOpen] = useState(false) ;
 
-      const handleLogout = async () => {
+  const handleLogout = async () => {
 
-        const { error } = await supabase.auth.signOut() ; 
+    await supabase.auth.signOut() ;
 
-        window.location.reload() ;
-    
-    } ;
+    window.location.reload() ;
 
+  } ;
 
-        const getSession = async () => {
-    
-            const { data } = await supabase.auth.getSession() ;
-            
-            setUser(data.session.user.email) ;
-    
-        }
-    
-        useEffect( () => { getSession() } , [] ) ; 
-    
+  const handleDots = () => {
 
-    return (
+    setOpen(o => !o) ;
 
-        <div className="header" > 
+  } ;
+
+  if (!remoteUserEmail) return null ; 
+
+  return (
+
+    <div className="header">
+
+      <div className="left">
+
+        <p className="logout" onClick={handleLogout}>
+
+          <Arrow />
+
+        </p>
+
+        <img src={`/avatars/avatar-${getAvatar(remoteUserEmail)}.jpg`} alt="avatar" />
+
+        <p className="name">
+
+          {remoteUserEmail.split('@')[0]}
+
+          <span>Online</span>
+
+        </p>
+
+      </div>
+
+      <div className="menu">
+
+        <p className="dots" onClick={handleDots}>
+
+          <Dots />
+
+        </p>
+
+        <div className={`float-out ${open ? "open" : ""}`} onClick={handleLogout}> Logout </div> 
         
-            <div className="left">
-                
-                <p className="logout" onClick={handleLogout}> <Arrow /> </p>
-
-                <img src="/avatars/avatar-1.jpg" alt="avatar1" />
-
-                <p className='name'> { user.split('@')[0] } 
-
-                <span> Online </span>
-
-                </p>
-
-            </div>
-
-            <p className='dots'> <Dots/> </p>
-
         </div>
 
-    ) } ;
+    </div>
+
+  ) ;
+} ;
 
 export default Header ;
-        

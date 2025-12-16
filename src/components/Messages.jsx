@@ -1,56 +1,71 @@
-import { useEffect, useState } from "react" ;
-import { supabase } from "../supabaseClient" ;
+import { useEffect, useRef, useState } from "react";
+import { supabase } from "../supabaseClient";
 import Message from "./Message";
 import Header from "./Header";
+import SendMessage from "./SendMessage";
 
 const Messages = () => {
 
-    const [messages, setMessages] = useState([]) ; 
+  const [messages, setMessages] = useState([]) ;
 
-    const callSupabase = async () => {
+  const [remoteUser, setRemoteUser] = useState(null) ;
+
+  const scroll = useRef() ;
+
+  const getSessionAndMessages = async () => {
+
+    const { data: sessionData } = await supabase.auth.getSession() ;
+    
+    const myEmail = sessionData.session.user.email;
 
     const { data, error } = await supabase.from("messages").select("*") ;
 
+    if (!error) {
 
+      setMessages(data) ;
 
-    if(error){ console.error(error) ; } else {
+      const otherUser = data.find(m => m.email !== myEmail) ;
 
-      setMessages(data) ; 
+      if (otherUser) {
 
-      console.table(data) ; // manera clara de ver lo que devuelve la api 
-    
+        setRemoteUser(otherUser.email) ;
+      }
     }
   } ;
 
-  useEffect(() => { callSupabase() } , [] ) ;
+  useEffect(() => {
+
+    getSessionAndMessages() ;}, []) ;
 
   return (
 
     <section className="messages">
 
-      <Header/>
+      <Header remoteUserEmail={remoteUser} />
 
-      <div className="content"> 
-        
-        { messages && messages.map((item, index) => (
-        
-                                            <Message
+      <div className="content">
 
-                                                key={index}
+        {messages.map((item, index) => (
 
-                                                message={item.content}
+          <Message
 
-                                                date={item.created_at}
+            key={index}
+            message={item.content}
+            date={item.created_at}
+            email={item.email}
 
-                                                email={item.email} 
-      
-                                                 />
-                                                    ))
-                                                         } 
-        </div>
+          />
+
+        ))}
+
+        <span ref={scroll}></span>
+
+      </div>
+
+      <SendMessage scroll={scroll} />
 
     </section>
-  ) 
+  ) ;
 } ;
 
 export default Messages ;
