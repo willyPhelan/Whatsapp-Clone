@@ -22,7 +22,7 @@ function App() {
 
     <div className='App'>
 
-        <h1> Whatsapp Clone </h1> 
+        <h1> Whatsapp Chat Clone </h1> 
 
         <p className='p-main'> Hecho con React y Supabase </p>
 
