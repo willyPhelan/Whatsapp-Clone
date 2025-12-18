@@ -17,8 +17,6 @@ const Login = () => {
     
     <button onClick={handleLogin}> Iniciar </button>
 
-   { /* <button onClick={handleLogout}> Cerrar </button> */ }
-
     </section>
 
     ) ;

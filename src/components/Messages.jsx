@@ -78,14 +78,8 @@ const Messages = () => {
             isOwn={msg.email === userEmail}
 
 
-           
-            
-            // <<<< PASAR EL ESTADO DE LECTURA >>>>
-            // Si la columna existe en Supabase:
             isRead={msg.is_read || false} 
-            
-            // Si no existe, usa true temporalmente para ver el ícono:
-            // isRead={true}
+          
           />
 
           

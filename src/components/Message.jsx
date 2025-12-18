@@ -19,6 +19,11 @@ const Message = ({message, date, email, isRead}) => {
 
     const isOwnMessage = user == email ;
 
+    const names = {
+        "sadisticloverecords@gmail.com": "Juan",
+        "phelanguille@gmail.com": "Willy"
+    } ;
+
     return(
 
         <div className={ `card ${isOwnMessage ? "me" : "" } ` } >
@@ -39,7 +44,7 @@ const Message = ({message, date, email, isRead}) => {
 
            <span className="user-email"> 
 
-            { isOwnMessage ? "me" : email.split('@')[0] } 
+            { isOwnMessage ? "me" : (names[email] || email.split('@')[0]) } 
             
            </span>
 

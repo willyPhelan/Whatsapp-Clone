@@ -12,8 +12,18 @@ const Header = ({ remoteUserEmail }) => {
 
     await supabase.auth.signOut() ;
 
-    window.location.reload() ;
+    window.location.href = "/" ;
   } ;
+
+  
+  const names = {
+    "sadisticloverecords@gmail.com": "Juan", "phelanguille@gmail.com": "Willy"
+  } ;
+
+
+  const displayName = names[remoteUserEmail] || (remoteUserEmail ? remoteUserEmail.split("@")[0] : "Cargando...") ;
+
+  const avatarId = getAvatar(remoteUserEmail) ;
 
   return (
 
@@ -21,36 +31,27 @@ const Header = ({ remoteUserEmail }) => {
 
       <div className="left">
 
-        <p className="logout" onClick={handleLogout}>
-
+        <div className="logout" onClick={handleLogout} style={{ cursor: 'pointer' }}>
           <Arrow />
-          
-        </p>
+        </div>
 
-        <img src={`/avatars/avatar-${getAvatar(remoteUserEmail)}.jpg`} alt="avatar" />
+        <img src={`public/avatars/avatar-${avatarId}.jpg`} alt="avatar" />
 
         <p className="name">
-
-          {remoteUserEmail.split("@")[0]}
-
+          {displayName}
           <span>Online</span>
-
         </p>
 
       </div>
 
       <div className="menu">
 
-        <p className="dots" onClick={() => setOpen(o => !o)}>
-
+        <div className="dots" onClick={() => setOpen(o => !o)} style={{ cursor: 'pointer' }}>
           <Dots />
+        </div>
 
-        </p>
-
-        <div className={`float-out ${open ? "open" : ""}`} onClick={handleLogout}>
-
+        <div className={`float-out ${open ? "open" : ""}`} onClick={handleLogout} style={{ cursor: 'pointer' }}>
           Logout
-
         </div>
 
       </div>
